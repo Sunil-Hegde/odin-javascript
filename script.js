@@ -1,6 +1,6 @@
 console.log("Hello World!");
 
-let playerSelection = prompt("Enter player selection(Rock, Paper or Scissors):");
+let playerSelection = prompt("Enter player selection (Rock, Paper, or Scissors):");
 
 function getComputerChoice() {
     const choices = ['Rock', 'Paper', 'Scissors'];
@@ -14,34 +14,14 @@ function playRound(playerSelection, computerChoice) {
     let a = playerSelection.toLowerCase();
     let b = computerChoice.toLowerCase();
 
-    switch (a) {
-        case "rock":
-            if (b === "rock") {
-                return "Play again! It is a tie.";
-            } else if (b === "paper") {
-                return "You Lose! Paper beats Rock.";
-            } else if (b === "scissors") {
-                return "You Win! Rock beats Scissors.";
-            }
-            break;
-        case "paper":
-            if (b === "paper") {
-                return "Play again! It is a tie.";
-            } else if (b === "rock") {
-                return "You Win! Paper beats Rock.";
-            } else if (b === "scissors") {
-                return "You Lose! Scissors beats Paper.";
-            }
-            break;
-        case "scissors":
-            if (b === "scissors") {
-                return "Play again! It is a tie.";
-            } else if (b === "rock") {
-                return "You Lose! Rock beats Scissors.";
-            } else if (b === "paper") {
-                return "You Win! Scissors beats Paper.";
-            }
-            break;
+    if (a === b) {
+        return "Play again! It is a tie.";
+    } else if ((a === "rock" && b === "scissors") ||
+               (a === "paper" && b === "rock") ||
+               (a === "scissors" && b === "paper")) {
+        return `You Win! ${a} beats ${b}.`;
+    } else {
+        return `You Lose! ${b} beats ${a}.`;
     }
 }
 
