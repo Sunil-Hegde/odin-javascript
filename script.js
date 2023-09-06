@@ -1,6 +1,25 @@
 console.log("Hello World!");
-
-let playerSelection = prompt("Enter player selection (Rock, Paper, or Scissors):");
+let playerWins = 0;
+let computerWins = 0;
+function game(){
+    let i =0;
+    for(i = 0;i<5;i++){
+        let playerSelection = prompt("Enter player selection (Rock, Paper, or Scissors):");
+        console.log(getComputerChoice());
+        result = playRound(playerSelection, getComputerChoice());
+        console.log(result);
+        if (result.includes("You Win")) {
+            playerWins++;
+        } else if (result.includes("You Lose")) {
+            computerWins++;
+        }
+    }
+    if (playerWins>=3 || playerWins>computerWins){
+        alert("You win");
+    } else {
+        alert("You lose");
+    }
+}
 
 function getComputerChoice() {
     const choices = ['Rock', 'Paper', 'Scissors'];
@@ -8,12 +27,9 @@ function getComputerChoice() {
     return choices[randomIndex];
 }
 
-console.log(getComputerChoice());
-
 function playRound(playerSelection, computerChoice) {
     let a = playerSelection.toLowerCase();
     let b = computerChoice.toLowerCase();
-
     if (a === b) {
         return "Play again! It is a tie.";
     } else if ((a === "rock" && b === "scissors") ||
@@ -24,5 +40,4 @@ function playRound(playerSelection, computerChoice) {
         return `You Lose! ${b} beats ${a}.`;
     }
 }
-
-console.log(playRound(playerSelection, getComputerChoice()));
+game();
