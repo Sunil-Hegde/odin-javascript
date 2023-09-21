@@ -1,63 +1,42 @@
-/*console.log("Hello World!");
+console.log("Hello World!");
+let computerChoice = '';
+let playerChoice = '';
 let playerWins = 0;
 let computerWins = 0;
-function game(){
-    let i =0;
-    for(i = 0;i<5;i++){
-        let playerSelection = prompt("Enter player selection (Rock, Paper, or Scissors):");
-        console.log(getComputerChoice());
-        result = playRound(playerSelection, getComputerChoice());
-        console.log(result);
-        if (result.includes("You Win")) {
-            playerWins++;
-        } else if (result.includes("You Lose")) {
-            computerWins++;
-        }
-    }
-    if (playerWins>=3 || playerWins>computerWins){
-        alert("You win");
-    } else {
-        alert("You lose");
-    }
-}
-function playRound(playerSelection, computerChoice) {
-    let a = playerSelection.toLowerCase();
-    let b = computerChoice.toLowerCase();
-    if (a === b) {
-        return "Play again! It is a tie.";
-    } else if ((a === "rock" && b === "scissors") ||
-               (a === "paper" && b === "rock") ||
-               (a === "scissors" && b === "paper")) {
-        return `You Win! ${a} beats ${b}.`;
-    } else {
-        return `You Lose! ${b} beats ${a}.`;
-    }
-}
-game();
-*/
-function playerSelection(){
+let gameStatement = '';
+function playerSelection() {
     const takeChoice = Array.from(document.querySelectorAll('.hand'));
     const playerSelectionImage = document.querySelector('.playerSelectedImage');
     takeChoice.forEach(hand => hand.addEventListener('click', (e) => {
-    const playerSelectionImageSource = e.target.getAttribute('src');
-    console.log(e.target.alt);
-    const displayPlayerSelectedImage = new Image();
-    displayPlayerSelectedImage.onload = () => {
-        displayPlayerSelectedImage.width = 150;
-        displayPlayerSelectedImage.height = 150;
-        playerSelectionImage.innerHTML = '';
-        playerSelectionImage.appendChild(displayPlayerSelectedImage);
-    };
-    displayPlayerSelectedImage.src = playerSelectionImageSource;
-    computerSelection();
-}));
+        const playerSelectionImageSource = e.target.getAttribute('src');
+        playerChoice = e.target.alt;
+        console.log("Player :",playerChoice);
+        const displayPlayerSelectedImage = new Image();
+        displayPlayerSelectedImage.onload = () => {
+            displayPlayerSelectedImage.width = 150;
+            displayPlayerSelectedImage.height = 150;
+            playerSelectionImage.innerHTML = '';
+            playerSelectionImage.appendChild(displayPlayerSelectedImage);
+        };
+        displayPlayerSelectedImage.src = playerSelectionImageSource;
+        computerSelection();
+        playRound(playerChoice, computerChoice);
+        console.log(playerWins);
+        console.log(computerWins);
+        console.log(gameStatement);
+        if(playerWins===3||computerWins===3){
+            resetGame();
+        }
+    }));
 }
+
 function getComputerChoice() {
     const choices = ['Rock', 'Paper', 'Scissors'];
     const randomIndex = Math.floor(Math.random() * choices.length);
     return choices[randomIndex];
 }
-function computerSelection(){
+
+function computerSelection() {
     const computerSelectionImage = document.querySelector('.computerSelectedImage');
     const displayComputerSelectedImage = new Image();
     displayComputerSelectedImage.onload = () => {
@@ -65,16 +44,41 @@ function computerSelection(){
         displayComputerSelectedImage.height = 150;
         computerSelectionImage.innerHTML = '';
         computerSelectionImage.appendChild(displayComputerSelectedImage);
-    };
-    const computerChoice = getComputerChoice();
-    console.log(computerChoice);
+
+    };        
+    computerChoice = getComputerChoice();
+    console.log("Computer :", computerChoice);
     displayComputerSelectedImage.src = `./images/${computerChoice}.png`;
 }
-playerSelection();
-
-
-
-
-
-
-
+playerSelection(() => {
+    console.log("Player :",playerChoice);
+    console.log("Computer :", computerChoice);
+    console.log("PlayerWins :",playerWins);
+    console.log("ComputerWins :", computerWins);
+    console.log("gameStatement : ", gameStatement);
+});
+function playRound(playerChoice, computerChoice) {
+    if (playerChoice === computerChoice) {
+        gameStatement = "Play again! It is a tie.";
+    } else if ((playerChoice === "Rock" && computerChoice === "Scissors") ||
+        (playerChoice === "Paper" && computerChoice === "Rock") ||
+        (playerChoice === "Scissors" && computerChoice === "Paper")) {
+        playerWins++;
+        gameStatement = `You Win! ${playerChoice} beats ${computerChoice}.`;
+    } else {
+        computerWins++;
+        gameStatement = `You Lose! ${computerChoice} beats ${playerChoice}.`;
+    }
+}
+function resetGame(){
+    console.log(`Game completed.`);
+    if(playerWins===3){
+        console.log("You Won!");
+        playerWins = 0;
+        computerWins = 0;
+    } else {
+        console.log("You Lose!");
+        playerWins = 0;
+        computerWins = 0;
+    }
+}
