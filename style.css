@@ -1,0 +1,74 @@
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffec00;
+    justify-content: space-between;
+}
+#upperBox {
+    display: flex;
+    margin: auto;
+    min-width: 1065px;
+}
+#middleBox {
+    display: flex;
+    min-width: 700px;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: auto;
+}
+.left{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.hand{
+    display: block;
+    height: 120px;
+    width: auto;
+    padding: 20px;
+    border-radius: 45%;
+}
+.hand:hover{
+    transform: scale(1.1);
+}
+.vs{
+    width: 125px;
+    height: auto;
+}
+#middleBox .playerSelection .playerSelectedImage, 
+#middleBox .computerSelection div{
+    display: block;
+    padding: 0px;
+    margin: 5px;
+    background-color: transparent;
+    border: black solid 2px;
+    height: 150px;
+    width: 150px;
+}
+.playerSelection,
+.computerSelection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 260px;
+}
+#middleBox .score{
+    padding: 75px;
+    margin: 100px;
+    background-color: lightblue;
+    border: black solid 2px;
+    height: 120px;
+    width: auto;
+}
+#lowerBox{
+    display: flex;
+    border: black solid 2px;
+    margin: auto;
+    padding: 100px 500px;
+}
+#creatorBox{
+    display: flex;
+    border: black solid 2px;
+    padding: 50px 500px;
+    margin: auto;
+}

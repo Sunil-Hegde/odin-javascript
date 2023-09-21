@@ -1,4 +1,4 @@
-console.log("Hello World!");
+/*console.log("Hello World!");
 let playerWins = 0;
 let computerWins = 0;
 function game(){
@@ -41,3 +41,25 @@ function playRound(playerSelection, computerChoice) {
     }
 }
 game();
+*/
+const takeChoice = Array.from(document.querySelectorAll('.hand'));
+const playerSelectionImage = document.querySelector('.playerSelectedImage');
+
+takeChoice.forEach(hand => hand.addEventListener('click', (e) => {
+    const playerSelectionImageSource = e.target.getAttribute('src');
+    console.log(e.target.alt);
+    const displayPlayerSelectedImage = new Image();
+    
+    displayPlayerSelectedImage.addEventListener('load', () => {
+        displayPlayerSelectedImage.width = 150;
+        displayPlayerSelectedImage.height = 150;
+    });
+    
+    displayPlayerSelectedImage.src = playerSelectionImageSource;
+    playerSelectionImage.innerHTML = '';
+    playerSelectionImage.appendChild(displayPlayerSelectedImage);
+}));
+
+
+
+
