@@ -20,13 +20,6 @@ function game(){
         alert("You lose");
     }
 }
-
-function getComputerChoice() {
-    const choices = ['Rock', 'Paper', 'Scissors'];
-    const randomIndex = Math.floor(Math.random() * choices.length);
-    return choices[randomIndex];
-}
-
 function playRound(playerSelection, computerChoice) {
     let a = playerSelection.toLowerCase();
     let b = computerChoice.toLowerCase();
@@ -42,23 +35,45 @@ function playRound(playerSelection, computerChoice) {
 }
 game();
 */
-const takeChoice = Array.from(document.querySelectorAll('.hand'));
-const playerSelectionImage = document.querySelector('.playerSelectedImage');
-
-takeChoice.forEach(hand => hand.addEventListener('click', (e) => {
+function playerSelection(){
+    const takeChoice = Array.from(document.querySelectorAll('.hand'));
+    const playerSelectionImage = document.querySelector('.playerSelectedImage');
+    takeChoice.forEach(hand => hand.addEventListener('click', (e) => {
     const playerSelectionImageSource = e.target.getAttribute('src');
     console.log(e.target.alt);
     const displayPlayerSelectedImage = new Image();
-    
-    displayPlayerSelectedImage.addEventListener('load', () => {
+    displayPlayerSelectedImage.onload = () => {
         displayPlayerSelectedImage.width = 150;
         displayPlayerSelectedImage.height = 150;
-    });
-    
+        playerSelectionImage.innerHTML = '';
+        playerSelectionImage.appendChild(displayPlayerSelectedImage);
+    };
     displayPlayerSelectedImage.src = playerSelectionImageSource;
-    playerSelectionImage.innerHTML = '';
-    playerSelectionImage.appendChild(displayPlayerSelectedImage);
+    computerSelection();
 }));
+}
+function getComputerChoice() {
+    const choices = ['Rock', 'Paper', 'Scissors'];
+    const randomIndex = Math.floor(Math.random() * choices.length);
+    return choices[randomIndex];
+}
+function computerSelection(){
+    const computerSelectionImage = document.querySelector('.computerSelectedImage');
+    const displayComputerSelectedImage = new Image();
+    displayComputerSelectedImage.onload = () => {
+        displayComputerSelectedImage.width = 150;
+        displayComputerSelectedImage.height = 150;
+        computerSelectionImage.innerHTML = '';
+        computerSelectionImage.appendChild(displayComputerSelectedImage);
+    };
+    const computerChoice = getComputerChoice();
+    console.log(computerChoice);
+    displayComputerSelectedImage.src = `./images/${computerChoice}.png`;
+}
+playerSelection();
+
+
+
 
 
 
