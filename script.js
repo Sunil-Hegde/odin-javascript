@@ -89,7 +89,7 @@ function resetGame(){
         playerWins = 0;
         computerWins = 0;
     }
-    
+
     updateFinalResult();
 }
 function updateScoreDisplay() {
