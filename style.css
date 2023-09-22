@@ -4,6 +4,7 @@ body {
     background-color: #ffec00;
     justify-content: space-between;
     margin: 0;
+    min-height: 100vh;
     font-family: Arial, sans-serif; 
 }
 #upperBox {
@@ -12,20 +13,14 @@ body {
     color: white;
     padding: 10px 0;
     text-align: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
 }
 #middleBox {
+    flex: 1; 
     display: flex;
     min-width: 700px;
     align-items: center;
     justify-content: space-evenly;
     margin: auto;
-    padding: 20px;
-    margin-top: 100px;
 }
 
 .left {
@@ -81,27 +76,21 @@ body {
     border-radius: 10px; 
 }
 #lowerBox{
-    width: 300px; 
-    height: 200px;
+    width: 300px;
+    height: 250px;
     margin: auto;
     background-color: #fff;
-    border: 2px solid #343a40;
     border-radius: 10px;
-    text-align: center;
+    border: 2px solid black;
     padding: 20px;
-    position: absolute;
-    left: calc(50% - 150px); 
-    bottom: 150px; 
+    text-align: center;
+    margin-bottom: 20px;
 
 }
 #creatorBox{
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 45px;
+    width: 100%;
     background-color: #343a40;
     color: white;
-    border-radius: 0;
     text-align: center;
+    padding: 5px 0;
 }
