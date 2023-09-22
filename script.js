@@ -4,6 +4,8 @@ let playerChoice = '';
 let playerWins = 0;
 let computerWins = 0;
 let gameStatement = '';
+let gameStatus = '';
+let finalStatement = '';
 function playerSelection() {
     const takeChoice = Array.from(document.querySelectorAll('.hand'));
     const playerSelectionImage = document.querySelector('.playerSelectedImage');
@@ -69,16 +71,37 @@ function playRound(playerChoice, computerChoice) {
         computerWins++;
         gameStatement = `You Lose! ${computerChoice} beats ${playerChoice}.`;
     }
+    updateScoreDisplay();
+    updateGameStatement();
 }
 function resetGame(){
     console.log(`Game completed.`);
+    gameStatus = 'Game completed.';
     if(playerWins===3){
         console.log("You Won!");
+        finalStatement = 'You Won!';
         playerWins = 0;
         computerWins = 0;
+        
     } else {
         console.log("You Lose!");
+        finalStatement = 'You Lose!';
         playerWins = 0;
         computerWins = 0;
     }
+    updateFinalResult();
+}
+function updateScoreDisplay() {
+    const playerWinsDisplay = document.querySelector('.player-wins');
+    const computerWinsDisplay = document.querySelector('.computer-wins');
+    playerWinsDisplay.textContent = `Player Wins: ${playerWins}`;
+    computerWinsDisplay.textContent = `Computer Wins: ${computerWins}`;
+}
+function updateGameStatement(){
+    const gameStatementDisplay = document.querySelector('.resultGameStatement');
+    gameStatementDisplay.textContent = `${gameStatement}`;
+}
+function updateFinalResult(){
+    const finalResultDisplay = document.querySelector('.finalResult');
+    finalResultDisplay.textContent = `${gameStatus} ${finalStatement}`;
 }
