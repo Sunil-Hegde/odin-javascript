@@ -5,19 +5,18 @@ body {
     justify-content: space-between;
     margin: 0;
     min-height: 100vh;
-    font-family: Arial, sans-serif;
+    font-family: 'OCR-A', monospace;
+    font-size: 14px; 
 }
-
 #upperBox {
     background-color: #343a40;
     color: white;
     padding: 10px 0;
     text-align: center;
     display: flex;
-    justify-content: center; /* Center content horizontally */
-    align-items: center; /* Center content vertically */
+    justify-content: center; 
+    align-items: center;
 }
-
 #middleBox {
     flex: 1;
     display: flex;
@@ -25,13 +24,11 @@ body {
     justify-content: space-between;
     margin: auto;
 }
-
 .left {
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
-
 .hand {
     display: block;
     height: 150px;
@@ -40,16 +37,13 @@ body {
     border-radius: 50%;
     transition: transform 0.2s;
 }
-
 .hand:hover {
     transform: scale(1.1);
 }
-
 .vs {
     width: 125px;
     height: auto;
 }
-
 #middleBox .playerSelection .playerSelectedImage,
 #middleBox .computerSelection .computerSelectedImage {
     display: block;
@@ -62,7 +56,6 @@ body {
     border-radius: 50%;
     overflow: hidden;
 }
-
 .playerSelection,
 .computerSelection {
     display: flex;
@@ -70,14 +63,12 @@ body {
     align-items: center;
     min-width: 260px;
 }
-
 .displaySelection {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
-
 #middleBox .score {
     display: flex;
     flex-direction: column;
@@ -90,10 +81,10 @@ body {
     width: auto;
     border-radius: 10px;
 }
-
 #lowerBox {
     width: 300px;
-    height: 200px;
+    height: auto;
+    min-height: 200px;
     margin: auto;
     background-color: #fff;
     border-radius: 10px;
@@ -102,7 +93,6 @@ body {
     text-align: center;
     margin-bottom: 20px;
 }
-
 #creatorBox {
     width: 100%;
     background-color: #343a40;
@@ -110,9 +100,8 @@ body {
     text-align: center;
     padding: 5px 0;
     display: flex;
-    justify-content: center; /* Center content horizontally */
+    justify-content: center; 
 }
-
 @media screen and (max-width: 500px) {
     #middleBox {
         width: 100%;
@@ -122,7 +111,6 @@ body {
         align-items: center;
         margin: auto;
     }
-
     .left {
         display: flex;
         flex-direction: column;
@@ -130,7 +118,6 @@ body {
         align-items: center;
         margin: auto;
     }
-
     .player,
     .displaySelection {
         display: flex;
@@ -168,7 +155,6 @@ body {
         border-radius: 50%;
         transition: transform 0.2s;
     }
-
     #middleBox .score {
         display: flex;
         flex-direction: column;
@@ -181,10 +167,10 @@ body {
         width: 300px;
         border-radius: 10px;
     }
-
     #lowerBox {
         width: 300px;
-        height: 200px;
+        height: auto;
+        min-height: 200px;
         margin: auto;
         background-color: #fff;
         border-radius: 10px;

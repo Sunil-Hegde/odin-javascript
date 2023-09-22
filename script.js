@@ -12,84 +12,91 @@ function playerSelection() {
     takeChoice.forEach(hand => hand.addEventListener('click', (e) => {
         const playerSelectionImageSource = e.target.getAttribute('src');
         playerChoice = e.target.alt;
-        console.log("Player :",playerChoice);
-        const displayPlayerSelectedImage = new Image();
-        displayPlayerSelectedImage.onload = () => {
-            displayPlayerSelectedImage.width = 150;
-            displayPlayerSelectedImage.height = 150;
-            playerSelectionImage.innerHTML = '';
-            playerSelectionImage.appendChild(displayPlayerSelectedImage);
-        };
-        displayPlayerSelectedImage.src = playerSelectionImageSource;
+        console.log("Player:", playerChoice);
+        displayPlayerSelectionImage(playerSelectionImageSource, playerSelectionImage);
         computerSelection();
         playRound(playerChoice, computerChoice);
         console.log(playerWins);
         console.log(computerWins);
         console.log(gameStatement);
-        if(playerWins===3||computerWins===3){
+        if (playerWins === 3 || computerWins === 3) {
             resetGame();
+        } else {
+            gameStatus = '';
+            finalStatement = '';
+            updateFinalResult();
         }
     }));
 }
-
+function displayPlayerSelectionImage(imageSource, imageElement) {
+    const newImage = new Image();
+    newImage.onload = () => {
+        newImage.width = 150;
+        newImage.height = 150;
+        imageElement.innerHTML = '';
+        imageElement.appendChild(newImage);
+    };
+    newImage.src = imageSource;
+}
+function displayComputerSelectionImage(imageSource, imageElement) {
+    const newImage = new Image();
+    newImage.onload = () => {
+        newImage.width = 150;
+        newImage.height = 150;
+        imageElement.innerHTML = '';
+        imageElement.appendChild(newImage);
+    };
+    newImage.src = imageSource;
+}
 function getComputerChoice() {
     const choices = ['Rock', 'Paper', 'Scissors'];
     const randomIndex = Math.floor(Math.random() * choices.length);
     return choices[randomIndex];
 }
-
 function computerSelection() {
     const computerSelectionImage = document.querySelector('.computerSelectedImage');
-    const displayComputerSelectedImage = new Image();
-    displayComputerSelectedImage.onload = () => {
-        displayComputerSelectedImage.width = 150;
-        displayComputerSelectedImage.height = 150;
-        computerSelectionImage.innerHTML = '';
-        computerSelectionImage.appendChild(displayComputerSelectedImage);
-
-    };        
     computerChoice = getComputerChoice();
-    console.log("Computer :", computerChoice);
-    displayComputerSelectedImage.src = `./images/${computerChoice}.png`;
+    console.log("Computer:", computerChoice);
+    displayComputerSelectionImage(`./images/${computerChoice}.png`, computerSelectionImage);
 }
 playerSelection(() => {
-    console.log("Player :",playerChoice);
-    console.log("Computer :", computerChoice);
-    console.log("PlayerWins :",playerWins);
-    console.log("ComputerWins :", computerWins);
-    console.log("gameStatement : ", gameStatement);
+    console.log("Player:", playerChoice);
+    console.log("Computer:", computerChoice);
+    console.log("PlayerWins:", playerWins);
+    console.log("ComputerWins:", computerWins);
+    console.log("gameStatement:", gameStatement);
 });
 function playRound(playerChoice, computerChoice) {
     if (playerChoice === computerChoice) {
-        gameStatement = "Play again! It is a tie.";
-    } else if ((playerChoice === "Rock" && computerChoice === "Scissors") ||
+        gameStatement = "Play again! The matrix is glitching, and you've triggered a paradox. Time to rethink your choices!";
+    } else if (
+        (playerChoice === "Rock" && computerChoice === "Scissors") ||
         (playerChoice === "Paper" && computerChoice === "Rock") ||
-        (playerChoice === "Scissors" && computerChoice === "Paper")) {
+        (playerChoice === "Scissors" && computerChoice === "Paper")
+    ) {
         playerWins++;
-        gameStatement = `You Win! ${playerChoice} beats ${computerChoice}.`;
+        gameStatement = `In the battle of wits, ${playerChoice} prevails! The computer's ${computerChoice} didn't stand a chance.`;
     } else {
         computerWins++;
-        gameStatement = `You Lose! ${computerChoice} beats ${playerChoice}.`;
+        gameStatement = `Defeat tastes bitter as your ${playerChoice} falls to the superior intellect of the computer's ${computerChoice}.`;
     }
     updateScoreDisplay();
     updateGameStatement();
 }
-function resetGame(){
+function resetGame() {
     console.log(`Game completed.`);
-    gameStatus = 'Game completed.';
-    if(playerWins===3){
+    gameStatus = "Game completed. The epic saga of Rock, Paper, and Scissors has reached its final chapter. Until the sequel!";
+    if (playerWins === 3) {
         console.log("You Won!");
-        finalStatement = 'You Won!';
+        finalStatement = "You're the Rock-Paper-Scissors champion! Start drafting your autobiography!";
         playerWins = 0;
         computerWins = 0;
-        
     } else {
         console.log("You Lose!");
-        finalStatement = 'You Lose!';
+        finalStatement = "Better luck next time, but remember, it's all fun and games!";
         playerWins = 0;
         computerWins = 0;
     }
-
     updateFinalResult();
 }
 function updateScoreDisplay() {
@@ -98,15 +105,15 @@ function updateScoreDisplay() {
     playerWinsDisplay.textContent = `Player Wins: ${playerWins}`;
     computerWinsDisplay.textContent = `Computer Wins: ${computerWins}`;
 }
-function updateGameStatement(){
+function updateGameStatement() {
     const gameStatementDisplay = document.querySelector('.resultGameStatement');
     gameStatementDisplay.textContent = `${gameStatement}`;
 }
-function updateFinalResult(){
+function updateFinalResult() {
     const finalResultDisplay = document.querySelector('.finalResult');
-    finalResultDisplay.textContent = `${gameStatus} ${finalStatement}`;
+    finalResultDisplay.innerHTML = `<p class="gameStatus">${gameStatus}</p><p class="finalStatement">${finalStatement}</p>`;
 }
-function resetGameScore(){
+function resetGameScore() {
     computerChoice = '';
     playerChoice = '';
     playerWins = 0;
@@ -117,6 +124,10 @@ function resetGameScore(){
     updateScoreDisplay();
     updateGameStatement();
     updateFinalResult();
+    const playerSelectionImage = document.querySelector('.playerSelectedImage');
+    const computerSelectionImage = document.querySelector('.computerSelectedImage');
+    playerSelectionImage.innerHTML = '';
+    computerSelectionImage.innerHTML = '';
 }
-const startAgain  = document.querySelector('.resetScore');
+const startAgain = document.querySelector('.resetScore');
 startAgain.addEventListener('click', resetGameScore);
