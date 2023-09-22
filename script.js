@@ -89,6 +89,7 @@ function resetGame(){
         playerWins = 0;
         computerWins = 0;
     }
+    
     updateFinalResult();
 }
 function updateScoreDisplay() {
@@ -105,3 +106,17 @@ function updateFinalResult(){
     const finalResultDisplay = document.querySelector('.finalResult');
     finalResultDisplay.textContent = `${gameStatus} ${finalStatement}`;
 }
+function resetGameScore(){
+    computerChoice = '';
+    playerChoice = '';
+    playerWins = 0;
+    computerWins = 0;
+    gameStatement = '';
+    gameStatus = '';
+    finalStatement = '';
+    updateScoreDisplay();
+    updateGameStatement();
+    updateFinalResult();
+}
+const startAgain  = document.querySelector('.resetScore');
+startAgain.addEventListener('click', resetGameScore);
